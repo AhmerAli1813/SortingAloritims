@@ -122,7 +122,127 @@ class Program
         }
         Console.WriteLine();
     }
+    // 1. Print Even Numbers
+    static void PrintEvenNumbers(int[] arr)
+    {
+        foreach (int num in arr)
+        {
+            if (num % 2 == 0)
+                Console.Write(num + " ");
+        }
+        Console.WriteLine();
+    }
 
+    // 2. Find Maximum Number
+    static void FindMax(int[] arr)
+    {
+        int max = arr[0];
+        for (int i = 1; i < arr.Length; i++)
+        {
+            if (arr[i] > max)
+                max = arr[i];
+        }
+        Console.WriteLine("Maximum = " + max);
+    }
+
+    // 3. Reverse an Array
+    static void ReverseArray(int[] arr)
+    {
+        int[] copy = (int[])arr.Clone();
+        Array.Reverse(copy);
+        foreach (int num in copy)
+            Console.Write(num + " ");
+        Console.WriteLine();
+    }
+
+    // 4. Check Palindrome
+    static void CheckPalindrome(string str)
+    {
+        string reversed = "";
+        for (int i = str.Length - 1; i >= 0; i--)
+            reversed += str[i];
+
+        if (str == reversed)
+            Console.WriteLine(str + " is a Palindrome");
+        else
+            Console.WriteLine(str + " is NOT a Palindrome");
+    }
+
+    // 5. Count Vowels
+    static void CountVowels(string str)
+    {
+        int count = 0;
+        str = str.ToLower();
+        foreach (char c in str)
+        {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+                count++;
+        }
+        Console.WriteLine("Total Vowels = " + count);
+    }
+
+    // 6. Find Second Largest Number
+    static void FindSecondLargest(int[] arr)
+    {
+        int first = int.MinValue, second = int.MinValue;
+
+        foreach (int num in arr)
+        {
+            if (num > first)
+            {
+                second = first;
+                first = num;
+            }
+            else if (num > second && num != first)
+            {
+                second = num;
+            }
+        }
+        Console.WriteLine("Second Largest = " + second);
+    }
+
+    // 7. Remove Duplicates
+    static void RemoveDuplicates(int[] arr)
+    {
+        HashSet<int> unique = new HashSet<int>(arr);
+        foreach (int num in unique)
+            Console.Write(num + " ");
+        Console.WriteLine();
+    }
+
+    // 8. Sum of Array
+    static void SumOfArray(int[] arr)
+    {
+        int sum = 0;
+        foreach (int num in arr)
+            sum += num;
+        Console.WriteLine("Sum = " + sum);
+    }
+
+    // 9. Fibonacci Series
+    static void PrintFibonacci(int n)
+    {
+        int a = 0, b = 1;
+        Console.Write(a + " " + b + " ");
+
+        for (int i = 2; i < n; i++)
+        {
+            int c = a + b;
+            Console.Write(c + " ");
+            a = b;
+            b = c;
+        }
+        Console.WriteLine();
+    }
+
+    // 10. Factorial of a Number
+    static int Factorial(int n)
+    {
+        int result = 1;
+        for (int i = 1; i <= n; i++)
+            result *= i;
+        return result;
+    }
     static void Main()
     {
         int[] arr = { 7, 13, 11, 5, 3,6,8,10,9, 2, 1, 4 };
@@ -135,5 +255,34 @@ class Program
 
         PrintArray(arr);
         PrintPrimes(arr);
+        Console.WriteLine("1. Even Numbers:");
+        PrintEvenNumbers(arr);
+
+        Console.WriteLine("\n2. Maximum Number:");
+        FindMax(arr);
+
+        Console.WriteLine("\n3. Reverse Array:");
+        ReverseArray(arr);
+
+        //Console.WriteLine("\n4. Check Palindrome:");
+        //CheckPalindrome(arr);
+
+        Console.WriteLine("\n5. Count Vowels:");
+        CountVowels("Hello World");
+
+        Console.WriteLine("\n6. Second Largest Number:");
+        FindSecondLargest(arr);
+
+        Console.WriteLine("\n7. Remove Duplicates:");
+        RemoveDuplicates(arr);
+
+        Console.WriteLine("\n8. Sum of Array:");
+        SumOfArray(arr);
+
+        Console.WriteLine("\n9. Fibonacci Series:");
+        PrintFibonacci(10);
+
+        Console.WriteLine("\n10. Factorial:");
+        Console.WriteLine("Factorial of 5 = " + Factorial(5));
     }
 }
