@@ -92,6 +92,27 @@ class Program
         }
     }
 
+    static bool IsPrime(int number){
+
+        if (number <= 1) return false;
+        for(int i =2; i*i <=number; i++)
+        {
+            if (number % 2 == 0) return false;
+        }
+        return true;
+    }
+    static void PrintPrimes(int[] arr)
+    {
+        Console.WriteLine("Prime numbers in the array:");
+        foreach (int num in arr)
+        {
+            if (IsPrime(num))
+            {
+                Console.Write(num + " ");
+            }
+        }
+        Console.WriteLine();
+    }
     // Helper method to print the array
     static void PrintArray(int[] arr)
     {
@@ -104,13 +125,15 @@ class Program
 
     static void Main()
     {
-        int[] arr = { 5, 3, 2, 1, 4 };
+        int[] arr = { 7, 13, 11, 5, 3,6,8,10,9, 2, 1, 4 };
 
         // Uncomment the sorting method you want to test
         // BubbleSort(arr);
         // SelectionSort(arr);
         InsertionSort(arr);
+        
 
         PrintArray(arr);
+        PrintPrimes(arr);
     }
 }
