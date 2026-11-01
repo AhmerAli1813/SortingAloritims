@@ -320,12 +320,25 @@ class Program
 
         #region Binary Search 
         InsertionSort(arr); // Ensure the array is sorted before binary search
-        Console.WriteLine("Sorted Array:");
-        PrintArray(arr);
-        Console.WriteLine("Enter a number to search in the array:");
-        int numberToSearch = Convert.ToInt32(Console.ReadLine());
-        SerachBinary(arr, numberToSearch); // Search for the entered number in the sorted array
+        while (true)
+        {
+            Console.WriteLine("Sorted Array:");
+            PrintArray(arr);
+            Console.Write("Enter a number to search, or type q to exit: ");
+            string? input = Console.ReadLine();
 
+            if (string.Equals(input, "q", StringComparison.OrdinalIgnoreCase))
+                break;
+
+            if (!int.TryParse(input, out int numberToSearch))
+            {
+                Console.WriteLine("Please enter a valid integer.");
+                continue;
+            }
+
+            SerachBinary(arr, numberToSearch); // Search for the entered number in the sorted array
+            Console.WriteLine();
+        }
         #endregion
     }
 
