@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 class Program
 {
@@ -243,46 +244,139 @@ class Program
             result *= i;
         return result;
     }
+    static string ReverseWord(string input)
+    {
+        char[] chars = input.ToCharArray();
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            if (char.IsUpper(chars[i]))
+                chars[i] = char.ToLower(chars[i]);
+            else if (char.IsLower(chars[i]))
+                chars[i] = char.ToUpper(chars[i]);
+        }
+
+        return new string(chars);
+    }
+    
     static void Main()
     {
         int[] arr = { 7, 13, 11, 5, 3,6,8,10,9, 2, 1, 4 };
+        //#region With Strings
+        //String str = "Hello";
+        //String str2 = "World";
+        //str = str + str2;
+        //Console.WriteLine(str);
+        //#endregion
+        //#region With Strings
+        //StringBuilder str1 = new StringBuilder("Hello");
+        // str2 = "World";
+        //str1.Append(str2);
+        //Console.WriteLine(str1);
+        //#endregion
+        //#region testing
+        //// Uncomment the sorting method you want to test
+        //// BubbleSort(arr);
+        //// SelectionSort(arr);
+        ////InsertionSort(arr);
 
-        // Uncomment the sorting method you want to test
-        // BubbleSort(arr);
-        // SelectionSort(arr);
-        InsertionSort(arr);
-        
 
+        ////PrintArray(arr);
+        ////PrintPrimes(arr);
+        ////Console.WriteLine("1. Even Numbers:");
+        ////PrintEvenNumbers(arr);
+
+        ////Console.WriteLine("\n2. Maximum Number:");
+        ////FindMax(arr);
+
+        ////Console.WriteLine("\n3. Reverse Array:");
+        ////ReverseArray(arr);
+
+        //////Console.WriteLine("\n4. Check Palindrome:");
+        ////CheckPalindrome("AHAHAHAHA");
+
+        ////Console.WriteLine("\n5. Count Vowels:");
+        ////CountVowels("Hello World");
+
+        ////Console.WriteLine("\n6. Second Largest Number:");
+        ////FindSecondLargest(arr);
+
+        ////Console.WriteLine("\n7. Remove Duplicates:");
+        ////RemoveDuplicates(arr);
+
+        ////Console.WriteLine("\n8. Sum of Array:");
+        ////SumOfArray(arr);
+
+        ////Console.WriteLine("\n9. Fibonacci Series:");
+        ////PrintFibonacci(10);
+
+
+        ////Console.WriteLine("\n10. Factorial:");
+        ////Console.WriteLine("Factorial of 5 = " + Factorial(5));
+
+        ////Console.WriteLine("\n11. Reverse Word:");
+        ////Console.WriteLine("Reversed 'AHmeR' = " + ReverseWord("AHmeR"));
+        //#endregion
+
+        #region Binary Search 
+        InsertionSort(arr); // Ensure the array is sorted before binary search
+        Console.WriteLine("Sorted Array:");
         PrintArray(arr);
-        PrintPrimes(arr);
-        Console.WriteLine("1. Even Numbers:");
-        PrintEvenNumbers(arr);
+        Console.WriteLine("Enter a number to search in the array:");
+        int numberToSearch = Convert.ToInt32(Console.ReadLine());
+        SerachBinary(arr, numberToSearch); // Search for the entered number in the sorted array
 
-        Console.WriteLine("\n2. Maximum Number:");
-        FindMax(arr);
+        #endregion
+    }
 
-        Console.WriteLine("\n3. Reverse Array:");
-        ReverseArray(arr);
+    private static void SerachBinary(int[] arr, int targetValue)
+    {
+       Console.WriteLine($"Searching for {targetValue} in the array...");
+        PrintArray(arr);
+        int loc = -1;
+        int b=0;
+        int e = arr.Length;
+       int mid = (b + e) / 2;
+        int step = 1;
+        if(targetValue> arr[e - 1] || targetValue < arr[b])
+        {
+            Console.WriteLine($"Element {targetValue} not found in the array");
+            return;
+        }
+        Console.WriteLine($"Initial mid index: {mid}, mid value: {arr[mid]}");
 
-        //Console.WriteLine("\n4. Check Palindrome:");
-        //CheckPalindrome(arr);
+        while (b <= e)  // loop while there's still a range to search
+        {
+             mid = (b + e) / 2;  // ← MUST be at the TOP
 
-        Console.WriteLine("\n5. Count Vowels:");
-        CountVowels("Hello World");
+            Console.WriteLine($"Step {step}: b={b}, e={e}, mid={mid}, arr[mid]={arr[mid]}");
 
-        Console.WriteLine("\n6. Second Largest Number:");
-        FindSecondLargest(arr);
+            if (arr[mid] == targetValue)
+            {
+                loc = mid;
+                Console.WriteLine($"  → FOUND! arr[{mid}] == {targetValue}");
+                break;
+            }
+            else if (arr[mid] < targetValue)
+            {
+                Console.WriteLine($"  → {arr[mid]} < {targetValue}, go RIGHT (b = mid+1 = {mid + 1})");
+                b = mid + 1;
+            }
+            else
+            {
+                Console.WriteLine($"  → {arr[mid]} > {targetValue}, go LEFT (e = mid-1 = {mid - 1})");
+                e = mid - 1;
+            }
+            step++;
+        }
+        if (loc != -1)
+        {
+            Console.WriteLine($"Element {targetValue} found at index {loc}");
+        }
+        else
+        {
+            Console.WriteLine($"Element {targetValue} not found in the array");
+        }
 
-        Console.WriteLine("\n7. Remove Duplicates:");
-        RemoveDuplicates(arr);
-
-        Console.WriteLine("\n8. Sum of Array:");
-        SumOfArray(arr);
-
-        Console.WriteLine("\n9. Fibonacci Series:");
-        PrintFibonacci(10);
-
-        Console.WriteLine("\n10. Factorial:");
-        Console.WriteLine("Factorial of 5 = " + Factorial(5));
     }
 }
